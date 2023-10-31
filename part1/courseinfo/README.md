@@ -1,8 +1,21 @@
-# React + Vite
+# My Exercises for Part 1 - Introduction to React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## courseinfo:
+- [x] 1.1
+- [x] 1.2
+- [x] 1.3
+- [x] 1.4
+- [x] 1.5
 
-Currently, two official plugins are available:
+## unicafe:
+- [ ] 1.6
+- [ ] 1.7
+- [ ] 1.8
+- [ ] 1.9
+- [ ] 1.10
+- [ ] 1.11
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## anecdotes:
+- [ ] 1.12
+- [ ] 1.13
+- [ ] 1.14
