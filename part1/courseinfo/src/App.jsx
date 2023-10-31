@@ -1,20 +1,6 @@
 const Header = (props) => {
     return (
-        <>
-            <h1>{props.course.name}</h1>
-        </>
-    )
-}
-
-const Part = (props) => {
-    const {name, exercises} = props.part
-
-    return (
-        <>
-            <p>
-                {name} {exercises}
-            </p>
-        </>
+        <h1>{props.course.name}</h1>
     )
 }
 
@@ -30,14 +16,20 @@ const Content = (props) => {
     )
 }
 
+const Part = (props) => {
+    const {name, exercises} = props.part
+
+    return (
+        <p> {name} {exercises} </p>
+    )
+}
+
 const Total = (props) => {
     let sum = 0
     props.parts.forEach(part => sum += part.exercises)
 
     return (
-        <>
-            <p>Number of exercises {sum}</p>
-        </>
+        <p>Number of exercises {sum}</p>
     )
 }
 
