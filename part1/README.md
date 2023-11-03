@@ -22,4 +22,4 @@ For each of exercise sets, my solution can be found in `/exercisename/src/App.js
 ## [anecdotes](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14):
 - [x] 1.12
 - [x] 1.13
-- [ ] 1.14
+- [x] 1.14

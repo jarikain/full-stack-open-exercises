@@ -13,25 +13,39 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
-  const [points, setPoints] = useState({})
+  const [votes, setVotes] = useState({})
 
   const selectRandomAnecdote = () => {
-    const randomIndex = Math.floor(Math.random() * anecdotes.length)
-    setSelected(randomIndex)
+    const randomKey = Math.floor(Math.random() * anecdotes.length)
+    setSelected(randomKey)
   }
 
   const upvote = () => {
-    const newPoints = {...points}
-    newPoints[selected] = newPoints[selected] + 1 || 1
-    setPoints(newPoints)
+    const newVotes = {...votes}
+    newVotes[selected] = newVotes[selected] + 1 || 1
+    setVotes(newVotes)
+  }
+
+  const getTopAnecdoteKey = () => {
+    let mostVotesKey = 0
+    for (const key in votes) {
+      if (votes[key] > votes[mostVotesKey]) {
+        mostVotesKey = key
+      }
+    }
+    return mostVotesKey
   }
 
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       <p>{anecdotes[selected]}</p>
-      <p>has {points[selected] || 0} votes</p>
+      <p>has {votes[selected] || 0} votes</p>
       <button onClick={upvote}>vote</button>
       <button onClick={selectRandomAnecdote}>next anecdote</button>
+
+      <h2>Anecdote with most votes</h2>
+      <p>{anecdotes[getTopAnecdoteKey()]}</p>
     </div>
   )
 }
