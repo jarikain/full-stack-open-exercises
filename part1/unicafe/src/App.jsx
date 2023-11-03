@@ -10,10 +10,40 @@ const Button = ({handleClick, text}) => {
 
 const Statistic = ({title, value}) => <p>{title} {value}</p>
 
+const Total = (props) => {
+  const { feedbacks: {good, neutral, bad }} = props
+  return (
+    <p>all {good + neutral + bad}</p>
+  )
+}
+
+const Average = (props) => {
+  const { feedbacks: {good, neutral, bad }} = props
+
+  const total = good + neutral + bad
+  const score = good + bad * -1
+  const average =  score/total
+
+  return (
+    <p>average {average || 0}</p>
+  )
+}
+
+const Positive = props => {
+  const { feedbacks: {good, neutral, bad }} = props
+  const total = good + neutral + bad
+
+  return (
+    <p>positive {good/total*100 || 0} %</p>
+  )
+}
+
 const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+
+  const feedbacks = {good, neutral, bad}
 
   return (
     <div>
@@ -28,6 +58,9 @@ const App = () => {
       <Statistic title="good" value={good}/>
       <Statistic title="neutral" value={neutral}/>
       <Statistic title="bad" value={bad}/>
+      <Total feedbacks={feedbacks} />
+      <Average feedbacks={feedbacks}/>
+      <Positive feedbacks={feedbacks} />
     </div>
   )
 }
