@@ -8,10 +8,17 @@ const Button = ({handleClick, text}) => {
   )
 }
 
-const StatisticLine = ({text, value}) => <p>{text} {value}</p>
+const StatisticLine = ({text, value}) => {
+  return (
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
+  )
+}
 
 const Statistics = props => {
-  const { feedbacks: {good, neutral, bad }} = props
+  const {feedbacks: {good, neutral, bad}} = props
 
   const total = good + neutral + bad
   if (!total) {
@@ -19,18 +26,20 @@ const Statistics = props => {
   }
 
   const score = good + bad * -1
-  const average =  score/total
-  const positive = good/total*100 + " %"
+  const average = score / total
+  const positive = good / total * 100 + " %"
 
   return (
-    <div>
+    <table>
+      <tbody>
       <StatisticLine text="good" value={good}/>
       <StatisticLine text="neutral" value={neutral}/>
       <StatisticLine text="bad" value={bad}/>
       <StatisticLine text="all" value={total}/>
       <StatisticLine text="average" value={average}/>
       <StatisticLine text="positive" value={positive}/>
-    </div>
+      </tbody>
+    </table>
   )
 }
 
