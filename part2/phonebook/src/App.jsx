@@ -1,4 +1,7 @@
 import {useState} from 'react'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -10,6 +13,10 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+
+  const handleNameChange = (event) => setNewName(event.target.value)
+  const handleNumberChange = (event) => setNewNumber(event.target.value)
+  const handleFilterChange = (event) => setFilter(event.target.value)
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -31,10 +38,6 @@ const App = () => {
     setNewNumber('')
   }
 
-  const handleNameChange = (event) => setNewName(event.target.value)
-  const handleNumberChange = (event) => setNewNumber(event.target.value)
-  const handleFilterChange = (event) => setFilter(event.target.value)
-
   const personsToShow = persons.filter(person =>
     person.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
     ||
@@ -43,35 +46,19 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h1>Phonebook App</h1>
 
-      <div>filter shown with <input
-        value={filter}
-        onChange={handleFilterChange}
-        name="filterInput"/>
-      </div>
+      <h2>Filter Results</h2>
+      <Filter value={filter} eventHandler={handleFilterChange}/>
 
-      <h2>add a new</h2>
-      <form onSubmit={addPerson} id="phonebookForm">
-        <div>name: <input
-          value={newName}
-          onChange={handleNameChange}
-          name="nameInput"/>
-        </div>
-        <div>number: <input
-          value={newNumber}
-          onChange={handleNumberChange}
-          name="numberInput"/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <h2>Add a new</h2>
+      <PersonForm
+        values={{newNumber, newName}}
+        eventHandlers={{handleNameChange, handleNumberChange, addPerson}}
+      />
 
       <h2>Numbers</h2>
-      {personsToShow.map(person =>
-        <p key={person.id}>{person.name} {person.number}</p>
-      )}
+      <Persons persons={personsToShow}/>
     </div>
   )
 }
