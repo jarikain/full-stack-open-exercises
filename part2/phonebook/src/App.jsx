@@ -9,6 +9,12 @@ const App = () => {
   const addName = (event) => {
     event.preventDefault()
 
+    const nameInPersons = persons.some(person => person.name === newName)
+    if (nameInPersons) {
+      alert(`${newName} is already added to phonebook`)
+      return
+    }
+
     const newPerson = {
       name: newName,
       id: persons.length + 1
@@ -23,6 +29,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+
       <form onSubmit={addName} id="phonebookForm">
         <div>
           name: <input value={newName} onChange={handleNameChange} name="nameInput"/>
@@ -31,6 +38,7 @@ const App = () => {
           <button type="submit">add</button>
         </div>
       </form>
+
       <h2>Numbers</h2>
       {persons.map(person =>
         <p key={person.id}>{person.name}</p>

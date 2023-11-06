@@ -11,7 +11,7 @@ For each of exercise sets, my solution can be found in `/exercisename/src/`
 
 ## [phonebook](https://fullstackopen.com/en/part2/forms#exercises-2-6-2-10)
 - [x] 2.6
-- [ ] 2.7
+- [x] 2.7
 - [ ] 2.8
 - [ ] 2.9
 - [ ] 2.10
