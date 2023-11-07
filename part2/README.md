@@ -15,4 +15,5 @@ For each of exercise sets, my solution can be found in `/exercisename/src/`
 - [x] 2.8
 - [x] 2.9
 - [x] 2.10
+- [x] 2.11
 
