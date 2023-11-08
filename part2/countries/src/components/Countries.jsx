@@ -1,6 +1,6 @@
 import CountryInfo from './CountryInfo'
 
-function Countries({countries}) {
+function Countries({countries, clickHandler}) {
   if (countries.length === 1) {
     return (
       <CountryInfo country={countries[0]}/>
@@ -11,7 +11,11 @@ function Countries({countries}) {
 
   return countries.map(
     country => (
-      <p key={country.name.common}>{country.name.common}</p>
+      <p key={country.name.common}>{`${country.name.common} `}
+        <button onClick={() => clickHandler(country.name.common)}>
+          show
+        </button>
+      </p>
     )
   )
 }

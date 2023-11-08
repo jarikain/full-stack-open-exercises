@@ -40,11 +40,12 @@ function App() {
       <p>{`find countries `}
         <input value={inputValue} onChange={handleInputChange}></input>
       </p>
-      <Countries countries={
-        exactCountryMatch.length === 1 ?
-          exactCountryMatch
-          : filteredCountries
-      }/>
+      <Countries
+        clickHandler={setInputValue}
+        countries={
+          exactCountryMatch.length === 1 ?
+            exactCountryMatch : filteredCountries
+        }/>
     </div>
   )
 }
