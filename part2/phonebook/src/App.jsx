@@ -10,7 +10,9 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
-  const [infoMessage, setInfoMessage] = useState('')
+  const [infoContent, setInfoContent] = useState({
+    message: "", type: ""
+  })
 
   useEffect(() => {
     personService
@@ -18,13 +20,16 @@ const App = () => {
       .then(initialPersons => {
         setPersons(initialPersons)
       })
+      .catch(() => {
+        setNotification(`Error while loading entries`, 'error', 5)
+      })
   }, []);
 
-  const setNotification = (message, seconds) => {
-    setInfoMessage(message)
+  const setNotification = (message, type, seconds = 3) => {
+    setInfoContent({message, type})
 
     setTimeout(() => {
-      setInfoMessage(null)
+      setInfoContent({message: "", type: ""})
     }, 1000*seconds)
   }
 
@@ -48,7 +53,10 @@ const App = () => {
         setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
-        setNotification(`Added ${returnedPerson.name}`, 3)
+        setNotification(`Added ${returnedPerson.name}`, 'info')
+      })
+      .catch(() => {
+        setNotification('Error creating an entry', 'error', 5)
       })
   }
 
@@ -60,7 +68,10 @@ const App = () => {
           setPersons(persons.filter(person => {
             return person.id !== targetPerson.id
           }))
-          setNotification(`Deleted ${targetPerson.name}`, 3)
+          setNotification(`Deleted ${targetPerson.name}`,  'info')
+        })
+        .catch(() => {
+          setNotification('Error deleting an entry', 'error', 5)
         })
     }
   }
@@ -79,7 +90,10 @@ const App = () => {
           setPersons(persons.map(person =>
             person.id !== returnedPerson.id ? person : returnedPerson
           ))
-          setNotification(`Changed ${returnedPerson.name}'s phone number`, 3)
+          setNotification(`Changed phone number of ${returnedPerson.name}`, 'info')
+        })
+        .catch((error) => {
+          setNotification(`Error modifying the entry: ${error.message}`, 'error', 5)
         })
     }
   }
@@ -88,7 +102,7 @@ const App = () => {
   const handleNumberChange = (event) => setNewNumber(event.target.value)
   const handleFilterChange = (event) => setFilter(event.target.value)
 
-  const personsToShow = persons.filter(person =>
+  const filteredPersons = persons.filter(person =>
     person.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
     ||
     person.number.includes(filter)
@@ -98,7 +112,7 @@ const App = () => {
     <div>
       <h1>Phonebook App</h1>
 
-      <Notification message={infoMessage} />
+      <Notification content={infoContent} />
 
       <h2>Filter Results</h2>
       <Filter value={filter} eventHandler={handleFilterChange}/>
@@ -110,7 +124,7 @@ const App = () => {
       />
 
       <h2>Numbers</h2>
-      <Persons persons={personsToShow} handleClick={deletePerson}/>
+      <Persons persons={filteredPersons} handleClick={deletePerson}/>
     </div>
   )
 }

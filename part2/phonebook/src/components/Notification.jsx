@@ -1,17 +1,23 @@
-const Notification = ({message}) => {
+const Notification = ({content}) => {
+  const contentTypeColors = {
+    error: 'red',
+    info: 'green'
+  }
+  const contentColor = contentTypeColors[content.type] || 'black'
+
   const notificationStyle = {
-    display: 'inline',
     padding: '15px',
-    border: '3px solid #016d24',
+    border: '3px solid',
     borderRadius: '10px',
-    color: '#016d24',
+    borderColor: contentColor,
+    color: contentColor,
     fontWeight: 600,
     fontFamily: 'sans-serif'
   }
 
-  return !message ? null : (
+  return !content.message ? null : (
     <div style={notificationStyle}>
-      {message}
+      {content.message}
     </div>
   )
 }
