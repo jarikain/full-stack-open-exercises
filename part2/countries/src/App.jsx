@@ -1,16 +1,16 @@
 import {useEffect, useState} from 'react'
-import axios from 'axios'
 import Countries from './components/Countries'
+import countriesService from './services/countries'
 
 function App() {
   const [inputValue, setInputValue] = useState('')
   const [allCountries, setAllCountries] = useState([])
 
   useEffect(() => {
-    axios
-      .get('https://studies.cs.helsinki.fi/restcountries/api/all')
-      .then(response => {
-        setAllCountries(response.data)
+    countriesService
+      .getAll()
+      .then(countries => {
+        setAllCountries(countries)
       })
       .catch(() => {
         setAllCountries([])
@@ -40,6 +40,7 @@ function App() {
       <p>{`find countries `}
         <input value={inputValue} onChange={handleInputChange}></input>
       </p>
+
       <Countries
         clickHandler={setInputValue}
         countries={

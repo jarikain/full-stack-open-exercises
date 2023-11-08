@@ -1,3 +1,5 @@
+import Weather from './Weather'
+
 function CountryInfo({country}) {
   const languages = Object.values(country.languages)
 
@@ -18,9 +20,12 @@ function CountryInfo({country}) {
       </ul>
 
       <img
+        style={{boxShadow: "0 5px 30px rgba(0,0,0,0.2)"}}
         src={country.flags.png}
         alt={country.flags.alt}
       />
+
+      <Weather country={country} />
     </div>
   )
 }
