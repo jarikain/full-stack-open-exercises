@@ -23,3 +23,7 @@ For each of exercise sets, my solution can be found in `/exercisename/src/`
 - [x] 2.16
 - [x] 2.17
 
+## [countries](https://fullstackopen.com/en/part2/adding_styles_to_react_app#exercises-2-18-2-20):
+- [ ] 2.18
+- [ ] 2.19
+- [ ] 2.20
