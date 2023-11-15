@@ -103,9 +103,9 @@ const App = () => {
   const handleFilterChange = (event) => setFilter(event.target.value)
 
   const filteredPersons = persons.filter(person =>
-    person.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+    person?.name?.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
     ||
-    person.number.includes(filter)
+    person?.number?.includes(filter)
   )
 
   return (
