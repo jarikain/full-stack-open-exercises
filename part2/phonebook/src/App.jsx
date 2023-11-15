@@ -20,8 +20,8 @@ const App = () => {
       .then(initialPersons => {
         setPersons(initialPersons)
       })
-      .catch(() => {
-        setNotification(`Error while loading entries`, 'error', 5)
+      .catch((error) => {
+        setNotification(error.message, 'error', 5)
       })
   }, []);
 
@@ -55,8 +55,8 @@ const App = () => {
         setNewNumber('')
         setNotification(`Added ${returnedPerson.name}`, 'info')
       })
-      .catch(() => {
-        setNotification('Error creating an entry', 'error', 5)
+      .catch((error) => {
+        setNotification(error.response.data.error || error.message, 'error', 5)
       })
   }
 
@@ -70,8 +70,8 @@ const App = () => {
           }))
           setNotification(`Deleted ${targetPerson.name}`,  'info')
         })
-        .catch(() => {
-          setNotification('Error deleting an entry', 'error', 5)
+        .catch((error) => {
+          setNotification(error.message, 'error', 5)
         })
     }
   }
@@ -93,7 +93,7 @@ const App = () => {
           setNotification(`Changed phone number of ${returnedPerson.name}`, 'info')
         })
         .catch((error) => {
-          setNotification(`Error modifying the entry: ${error.message}`, 'error', 5)
+          setNotification(error.response.data.error || error.message, 'error', 5)
         })
     }
   }
