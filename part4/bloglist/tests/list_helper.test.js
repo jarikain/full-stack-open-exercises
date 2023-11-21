@@ -1,4 +1,10 @@
-const { dummy, totalLikes, favoriteBlog, mostBlogs } = require('../utils/list_helper')
+const {
+  dummy,
+  totalLikes,
+  favoriteBlog,
+  mostBlogs,
+  mostLikes
+} = require('../utils/list_helper')
 const blogs = [
   {
     title: 'React patterns',
@@ -114,6 +120,27 @@ describe('most blogs', () => {
     expect(result).toEqual({
       author: '',
       blogs: 0
+    })
+  })
+})
+
+describe('most likes', () => {
+
+  test('shows the right author and likes count', () => {
+    const result = mostLikes(blogs)
+
+    expect(result).toEqual({
+      author: 'Edsger W. Dijkstra',
+      likes: 17
+    })
+  })
+
+  test('returns empty values for fields if input is empty array', () => {
+    const result = mostLikes([])
+
+    expect(result).toEqual({
+      author: '',
+      likes: 0
     })
   })
 })
