@@ -1,3 +1,4 @@
+const testHelper = require('./test_helper')
 const {
   dummy,
   totalLikes,
@@ -5,44 +6,6 @@ const {
   mostBlogs,
   mostLikes
 } = require('../utils/list_helper')
-const blogs = [
-  {
-    title: 'React patterns',
-    author: 'Michael Chan',
-    url: 'https://reactpatterns.com/',
-    likes: 7
-  },
-  {
-    title: 'Go To Statement Considered Harmful',
-    author: 'Edsger W. Dijkstra',
-    url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
-    likes: 5
-  },
-  {
-    title: 'Canonical string reduction',
-    author: 'Edsger W. Dijkstra',
-    url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
-    likes: 12
-  },
-  {
-    title: 'First class tests',
-    author: 'Robert C. Martin',
-    url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
-    likes: 10
-  },
-  {
-    title: 'TDD harms architecture',
-    author: 'Robert C. Martin',
-    url: 'http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html',
-    likes: 0
-  },
-  {
-    title: 'Type wars',
-    author: 'Robert C. Martin',
-    url: 'http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html',
-    likes: 2
-  }
-]
 
 test('dummy returns one', () => {
   const blogs = []
@@ -62,17 +25,17 @@ describe('total likes', () => {
   test('when list has only one blog equals the likes of that', () => {
     const index = 0
     const result = totalLikes([
-      blogs[index]
+      testHelper.blogs[index]
     ])
 
-    expect(result).toBe(blogs[index].likes)
+    expect(result).toBe(testHelper.blogs[index].likes)
   })
 
   test('of a bigger list is calculated right', () => {
-    const testListTotal = blogs.reduce(
+    const testListTotal = testHelper.blogs.reduce(
       (total, blog) => total + blog.likes
       , 0)
-    const result = totalLikes(blogs)
+    const result = totalLikes(testHelper.blogs)
 
     expect(result).toBe(testListTotal)
   })
@@ -92,7 +55,7 @@ describe('favorite blog', () => {
   })
 
   test('is the blog object with most likes', () => {
-    const result = favoriteBlog(blogs)
+    const result = favoriteBlog(testHelper.blogs)
 
     expect(result).toEqual({
       title: 'Canonical string reduction',
@@ -103,10 +66,10 @@ describe('favorite blog', () => {
   })
 })
 
-describe('most blogs', () => {
+describe('most testHelper.blogs', () => {
 
   test('shows the right author and blog count', () => {
-    const result = mostBlogs(blogs)
+    const result = mostBlogs(testHelper.blogs)
 
     expect(result).toEqual({
       author: 'Robert C. Martin',
@@ -127,7 +90,7 @@ describe('most blogs', () => {
 describe('most likes', () => {
 
   test('shows the right author and likes count', () => {
-    const result = mostLikes(blogs)
+    const result = mostLikes(testHelper.blogs)
 
     expect(result).toEqual({
       author: 'Edsger W. Dijkstra',

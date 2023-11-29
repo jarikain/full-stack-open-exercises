@@ -5,6 +5,7 @@ const logger = require('./utils/logger')
 const cors = require('cors')
 const blogsRouter = require('./controllers/blogs')
 const { unknownEndpoint } = require('./utils/middleware')
+require('express-async-errors')
 
 const app = express()
 
