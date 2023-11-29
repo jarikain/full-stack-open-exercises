@@ -11,13 +11,13 @@ beforeEach(async () => {
   await Blog.insertMany(testHelper.blogs)
 })
 
-test('all notes are returned', async () => {
+test('all blogs are returned', async () => {
   const response = await api.get('/api/blogs')
 
   expect(response.body).toHaveLength(testHelper.blogs.length)
 })
 
-test('notes are returned in JSON format', async () => {
+test('blogs are returned in JSON format', async () => {
   await api
     .get('/api/blogs')
     .expect(200)
