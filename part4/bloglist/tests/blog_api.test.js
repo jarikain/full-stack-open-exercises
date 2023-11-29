@@ -24,6 +24,18 @@ test('blogs are returned in JSON format', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
+test('a blog can be retrieved by id', async () => {
+  const blogs = await testHelper.blogsInDB()
+  const firstBlog = blogs[0]
+
+  const response   = await api
+    .get(`/api/blogs/${firstBlog.id}`)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  expect(response.body).toEqual(firstBlog)
+})
+
 test('blog identifier field is called "id"', async () => {
   const response = await api.get('/api/blogs')
 
