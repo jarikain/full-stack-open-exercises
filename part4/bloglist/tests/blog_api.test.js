@@ -108,6 +108,21 @@ test('return bad request if title or url is missing', async () =>  {
     .expect(400)
 })
 
+test('a blog can be deleted', async () => {
+  const blogs = await testHelper.blogsInDB()
+  const blogToBeDeleted = blogs[0]
+
+  await api
+    .delete(`/api/blogs/${blogToBeDeleted.id}`)
+    .expect(204)
+
+  const blogsAfterDeletion = await testHelper.blogsInDB()
+  expect(blogsAfterDeletion).toHaveLength(blogs.length - 1)
+
+  const findById = await Blog.findById(blogToBeDeleted.id)
+  expect(findById).toBeNull()
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })

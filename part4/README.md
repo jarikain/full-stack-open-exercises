@@ -17,3 +17,7 @@
 - [x] 4.10
 - [x] 4.11
 - [x] 4.12
+
+## [4.13-4.14](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-13-4-14)
+- [x] 4.13
+- [ ] 4.14
