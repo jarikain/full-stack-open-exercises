@@ -1,3 +1,5 @@
+const Blog = require('../models/blog')
+
 const blogs = [
   {
     title: 'React patterns',
@@ -37,4 +39,9 @@ const blogs = [
   }
 ]
 
-module.exports = { blogs }
+const blogsInDB = async () => {
+  const blogs = await Blog.find({})
+  return blogs.map(blog => blog.toJSON())
+}
+
+module.exports = { blogs, blogsInDB }

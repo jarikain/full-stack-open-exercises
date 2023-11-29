@@ -30,6 +30,33 @@ test('blog identifier field is called "id"', async () => {
   expect(response.body[0].id).toBeDefined()
 })
 
+test('collection size increases when new blog document is added', async () => {
+  await api
+    .post('/api/blogs')
+    .send(testHelper.blogs[0])
+
+  const blogListSize = await testHelper.blogsInDB()
+  expect(blogListSize).toHaveLength(testHelper.blogs.length + 1)
+})
+
+test('a new blog document is added correctly', async () => {
+  const blogEntry = {
+    title: 'Test Title',
+    author: 'Test Author',
+    url: 'localhost',
+    likes: 99
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(blogEntry)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogEntryOnDb = Blog.findOne(blogEntry).getFilter()
+  expect(blogEntryOnDb).toEqual(blogEntry)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })

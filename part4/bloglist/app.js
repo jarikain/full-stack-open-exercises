@@ -1,5 +1,5 @@
 const express = require('express')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose').default
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 const cors = require('cors')
