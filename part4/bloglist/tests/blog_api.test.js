@@ -74,6 +74,28 @@ test('default value for likes is set to 0', async () => {
   expect(blogEntryOnDb.likes).toBe(0)
 })
 
+test('return bad request if title or url is missing', async () =>  {
+  const titlesBlog = {
+    author: 'Test Author',
+    url: 'localhost'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(titlesBlog)
+    .expect(400)
+
+  const urllesBlog = {
+    title: 'Test title',
+    author: 'Test Author',
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(urllesBlog)
+    .expect(400)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
