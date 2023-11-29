@@ -53,8 +53,25 @@ test('a new blog document is added correctly', async () => {
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
-  const blogEntryOnDb = Blog.findOne(blogEntry).getFilter()
+  const blogEntryOnDb = await Blog.findOne(blogEntry).getFilter()
   expect(blogEntryOnDb).toEqual(blogEntry)
+})
+
+test('default value for likes is set to 0', async () => {
+  const blogEntry = {
+    title: 'Test Title',
+    author: 'Test Author',
+    url: 'localhost'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(blogEntry)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogEntryOnDb = await Blog.findOne(blogEntry).lean()
+  expect(blogEntryOnDb.likes).toBe(0)
 })
 
 afterAll(async () => {
