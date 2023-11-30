@@ -123,6 +123,21 @@ test('a blog can be deleted', async () => {
   expect(findById).toBeNull()
 })
 
+test('blog updates correctly', async () => {
+  const newLikes = 10
+  const { title } = testHelper.blogs[0]
+  const blog = await Blog.findOne({ title })
+  blog.likes = newLikes
+
+  await api
+    .put(`/api/blogs/${blog.id}`)
+    .send(blog)
+    .expect(200)
+
+  const updatedBlog = await Blog.findOne({ title })
+  expect(updatedBlog.likes).toBe(newLikes)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
